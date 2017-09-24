@@ -9,36 +9,27 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     DiographStore.setAuthToken(DiographAuthentication.token);
+    this.state = {diories: []}
+
+    DiographStore.getAllDiories().then((result) => {
+      this.setState({diories: result})
+    })
   }
 
   render() {
     return (
-      <div>Lorem ipsum</div>
+      <ul>
+       {this.state.diories.map((diory, index) => {
+         return <li key={ index }>{ diory.name }</li>;
+       })}
+      </ul>
     )
   }
 
 }
 
-DiographAuthentication.onLogin = () => {
-  render()
-}
+ReactDOM.render(
+  <App />,
+  document.getElementById('app')
+);
 
-DiographAuthentication.onLogout = () => {
-  clear()
-}
-
-function clear() {
-  ReactDOM.render(
-    <div><p>Please authenticate.</p></div>,
-    document.getElementById('app')
-  );
-}
-
-function render() {
-  ReactDOM.render(
-    <App />,
-    document.getElementById('app')
-  );
-}
-
-render()

@@ -5,7 +5,7 @@
 ```
 npm start
 ```
-Then go to: http://localhost:4200/
+Then go to: http://localhost:4203/
 
 
 ## Tests
@@ -20,5 +20,5 @@ npm test
 webpack
 cp app/index.html dist/index.html
 # Change "../dist/bundle.js" to "bundle.js" in dist/index.html
-surge ./dist diograph-react-template.surge.sh
+surge ./dist diograph-admin.surge.sh
 ```
