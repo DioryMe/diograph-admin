@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { DiographStore } from "diograph-store"
 import { DiographAuthentication } from "diograph-authentication"
+import { DioryForm } from "./diory-form"
 
 class App extends React.Component {
   state
@@ -21,12 +22,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <input value={this.state.inFocus.name} /><br/>
-          <input value={this.state.inFocus.geo.latitude} /><br/>
-          <input value={this.state.inFocus.geo.longitude} /><br/>
-          <button onClick={() => { console.log("Button clicked")}}>Button</button>
-        </div>
+        <DioryForm diory={this.state.inFocus} />
         <ul>
          {this.state.diories.map((diory, index) => {
            return <li onClick={() => { this.setState({inFocus: diory})} } key={ index }>{ diory.name }</li>;
