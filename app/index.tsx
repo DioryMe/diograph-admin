@@ -41,19 +41,13 @@ class App extends React.Component {
   onDioryChange(d) {
     let latitude, longitude, dioryCopy, dCopy
     let diory = this.state.inFocus
+    // Exception case: geo
     if (d["geo"]) {
-      dCopy = JSON.parse(JSON.stringify(d))
-      dioryCopy = JSON.parse(JSON.stringify(diory))
-      latitude = dioryCopy["geo"]["latitude"]
-      longitude = dioryCopy["geo"]["longitude"]
+      if (d["geo"]["latitude"]) { d["geo"]["longitude"] = diory["geo"]["longitude"] }
+      if (!d["geo"]["latitude"]) { d["geo"]["latitude"] = diory["geo"]["latitude"] }
     }
     // Merge object d with diory
     for (var attrname in d) { diory[attrname] = d[attrname]; }
-    // Exception case: geo
-    if (d["geo"]) {
-      if (dCopy["geo"]["latitude"]) { diory["geo"]["longitude"] = longitude }
-      if (dCopy["geo"]["longitude"]) { diory["geo"]["latitude"] = latitude }
-    }
     this.setState({inFocus: diory})
   }
 }
