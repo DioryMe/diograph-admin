@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { DiographStore } from "diograph-store"
 import { DiographAuthentication } from "diograph-authentication"
+
+import { DiographSearchCreate } from "diograph-search-create"
 import { DioryForm } from "./diory-form"
 import { DioryList } from "./diory-list"
 
@@ -23,6 +25,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <DiographSearchCreate putInFocus={(diory) => { this.setState({inFocus: diory}) }} />
         <DioryForm diory={this.state.inFocus} />
         <DioryList diories={this.state.diories} />
       </div>
