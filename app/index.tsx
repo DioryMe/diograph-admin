@@ -18,7 +18,7 @@ class App extends React.Component {
 
     DiographStore.getAllDiories().then((result) => {
       this.setState({diories: result})
-      this.setState({inFocus: this.state.diories[5]})
+      this.setState({inFocus: this.state.diories[4]})
     })
   }
 
@@ -26,7 +26,7 @@ class App extends React.Component {
     return (
       <div>
         <DiographSearchCreate onFocusClick={(dioryId) => { this.putInFocus(dioryId)}} />
-        <DioryForm diory={this.state.inFocus} />
+        <DioryForm diory={this.state.inFocus} onDioryChange={(diory) => { this.onDioryChange(diory) }} />
         <DioryList diories={this.state.diories} />
       </div>
     )
@@ -38,6 +38,24 @@ class App extends React.Component {
     })
   }
 
+  onDioryChange(d) {
+    let latitude, longitude, dioryCopy, dCopy
+    let diory = this.state.inFocus
+    if (d["geo"]) {
+      dCopy = JSON.parse(JSON.stringify(d))
+      dioryCopy = JSON.parse(JSON.stringify(diory))
+      latitude = dioryCopy["geo"]["latitude"]
+      longitude = dioryCopy["geo"]["longitude"]
+    }
+    // Merge object d with diory
+    for (var attrname in d) { diory[attrname] = d[attrname]; }
+    // Exception case: geo
+    if (d["geo"]) {
+      if (dCopy["geo"]["latitude"]) { diory["geo"]["longitude"] = longitude }
+      if (dCopy["geo"]["longitude"]) { diory["geo"]["latitude"] = latitude }
+    }
+    this.setState({inFocus: diory})
+  }
 }
 
 ReactDOM.render(
