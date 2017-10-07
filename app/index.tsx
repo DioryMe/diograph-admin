@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     DiographStore.setAuthToken(DiographAuthentication.token);
-    this.state = {diories: [], inFocus: {name: "cool", geo: {}}}
+    this.state = {diories: [], inFocus: {geo: {}}}
 
     DiographStore.getAllDiories().then((result) => {
       this.setState({diories: result})
@@ -42,9 +42,8 @@ class App extends React.Component {
   }
 
   onDioryChange(d) {
-    let latitude, longitude, dioryCopy, dCopy
     let diory = this.state.inFocus
-    // Exception case: geo
+    // Exception case: nested geo property
     if (d["geo"]) {
       if (d["geo"]["latitude"]) { d["geo"]["longitude"] = diory["geo"]["longitude"] }
       if (!d["geo"]["latitude"]) { d["geo"]["latitude"] = diory["geo"]["latitude"] }
