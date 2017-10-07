@@ -18,14 +18,14 @@ class App extends React.Component {
 
     DiographStore.getAllDiories().then((result) => {
       this.setState({diories: result})
-      this.setState({inFocus: this.state.diories[6]})
+      this.setState({inFocus: this.state.diories[5]})
     })
   }
 
   render() {
     return (
       <div>
-        <DiographSearchCreate putInFocus={(diory) => { this.setState({inFocus: diory}) }} />
+        <DiographSearchCreate onFocusClick={(diory) => { this.setState({inFocus: diory}) }} />
         <DioryForm diory={this.state.inFocus} />
         <DioryList diories={this.state.diories} />
       </div>

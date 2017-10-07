@@ -10,10 +10,12 @@ export class DioryForm extends React.Component<DioryFormProps, undefined> {
   }
 
   render() {
+    let latitude = this.props.diory.geo ? this.props.diory.geo.latitude : ""
+    let longitude = this.props.diory.geo ? this.props.diory.geo.longitude : ""
     return <div>
       <input defaultValue={this.props.diory.name} /><br/>
-      <input defaultValue={this.props.diory.geo.latitude} /><br/>
-      <input defaultValue={this.props.diory.geo.longitude} /><br/>
+      <input defaultValue={latitude} /><br/>
+      <input defaultValue={longitude} /><br/>
       <button onClick={() => { console.log("Button clicked")}}>Button</button>
     </div>
   }
