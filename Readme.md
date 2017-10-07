@@ -1,4 +1,4 @@
-# Diograph test app
+# Diograph admin
 
 ## Usage / Development
 
@@ -19,6 +19,6 @@ npm test
 ```
 webpack
 cp app/index.html dist/index.html
-# Change "../dist/bundle.js" to "bundle.js" in dist/index.html
+# Change "../dist/bundle.js" to "../bundle.js" in dist/index.html
 surge ./dist diograph-admin.surge.sh
 ```
