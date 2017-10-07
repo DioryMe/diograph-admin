@@ -26,7 +26,10 @@ class App extends React.Component {
     return (
       <div>
         <DiographSearchCreate onFocusClick={(dioryId) => { this.putInFocus(dioryId)}} />
-        <DioryForm diory={this.state.inFocus} onDioryChange={(diory) => { this.onDioryChange(diory) }} />
+        <DioryForm
+          diory={this.state.inFocus}
+          onDioryChange={(diory) => { this.onDioryChange(diory) }}
+          onSaveClick={() => console.log(this.state.inFocus) }/>
         <DioryList diories={this.state.diories} onFocusClick={(dioryId) => { this.putInFocus(dioryId)}} />
       </div>
     )
@@ -45,6 +48,8 @@ class App extends React.Component {
     if (d["geo"]) {
       if (d["geo"]["latitude"]) { d["geo"]["longitude"] = diory["geo"]["longitude"] }
       if (!d["geo"]["latitude"]) { d["geo"]["latitude"] = diory["geo"]["latitude"] }
+      d["geo"]["type"] = diory["geo"]["type"]
+      d["geo"]["geoRadius"] = diory["geo"]["geoRadius"]
     }
     // Merge object d with diory
     for (var attrname in d) { diory[attrname] = d[attrname]; }
