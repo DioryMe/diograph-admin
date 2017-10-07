@@ -9802,7 +9802,7 @@ var App = /** @class */ (function (_super) {
         var _this = this;
         return (React.createElement("div", null,
             React.createElement(diograph_search_create_1.DiographSearchCreate, { onFocusClick: function (dioryId) { _this.putInFocus(dioryId); } }),
-            React.createElement(diory_form_1.DioryForm, { diory: this.state.inFocus, onDioryChange: function (diory) { _this.onDioryChange(diory); } }),
+            React.createElement(diory_form_1.DioryForm, { diory: this.state.inFocus, onDioryChange: function (diory) { _this.onDioryChange(diory); }, onSaveClick: function () { return console.log(_this.state.inFocus); } }),
             React.createElement(diory_list_1.DioryList, { diories: this.state.diories, onFocusClick: function (dioryId) { _this.putInFocus(dioryId); } })));
     };
     App.prototype.putInFocus = function (dioryId) {
@@ -9814,21 +9814,21 @@ var App = /** @class */ (function (_super) {
     App.prototype.onDioryChange = function (d) {
         var latitude, longitude, dioryCopy, dCopy;
         var diory = this.state.inFocus;
-        // if (d["geo"]) {
-        //   dCopy = JSON.parse(JSON.stringify(d))
-        //   dioryCopy = JSON.parse(JSON.stringify(diory))
-        //   latitude = dioryCopy["geo"]["latitude"]
-        //   longitude = dioryCopy["geo"]["longitude"]
-        // }
+        // Exception case: geo
+        if (d["geo"]) {
+            if (d["geo"]["latitude"]) {
+                d["geo"]["longitude"] = diory["geo"]["longitude"];
+            }
+            if (!d["geo"]["latitude"]) {
+                d["geo"]["latitude"] = diory["geo"]["latitude"];
+            }
+            d["geo"]["type"] = diory["geo"]["type"];
+            d["geo"]["geoRadius"] = diory["geo"]["geoRadius"];
+        }
         // Merge object d with diory
         for (var attrname in d) {
             diory[attrname] = d[attrname];
         }
-        // Exception case: geo
-        // if (d["geo"]) {
-        //   if (dCopy["geo"]["latitude"]) { diory["geo"]["longitude"] = longitude }
-        //   if (dCopy["geo"]["longitude"]) { diory["geo"]["latitude"] = latitude }
-        // }
         this.setState({ inFocus: diory });
     };
     return App;
@@ -22900,7 +22900,8 @@ exports.DiographStore = DiographStore;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var Diory = /** @class */ (function () {
-    function Diory(data) {
+    function Diory(data, addConnectedDiories) {
+        if (addConnectedDiories === void 0) { addConnectedDiories = true; }
         this.connectedDiories = [];
         // If attribute is null, change it to undefined
         for (var attrname in data) {
@@ -22924,15 +22925,17 @@ var Diory = /** @class */ (function () {
         this.background = data.background;
         this.date = data.date;
         this.geo = data.geo;
-        if (data["connected-diories"]) {
-            this.addConnectedDiories(data["connected-diories"]);
+        if (data["connected-diories"] && addConnectedDiories) {
+            this.addConnectedDiories(data);
         }
     }
-    Diory.prototype.addConnectedDiories = function (connectedDioriesData) {
+    Diory.prototype.addConnectedDiories = function (dioryData) {
         var _this = this;
-        connectedDioriesData.forEach(function (connectedDioryData) {
-            var connectedDiory = new Diory(connectedDioryData);
-            _this.connectedDiories.push(connectedDiory);
+        dioryData["connected-diories"].forEach(function (connectedDioryData) {
+            if (connectedDioryData.id !== dioryData.id) {
+                var connectedDiory = new Diory(connectedDioryData, false);
+                _this.connectedDiories.push(connectedDiory);
+            }
         });
     };
     return Diory;
@@ -36650,19 +36653,18 @@ var DioryForm = /** @class */ (function (_super) {
     }
     DioryForm.prototype.render = function () {
         var _this = this;
-        console.log(this.props.diory);
-        // let latitude = this.props.diory.geo ? this.props.diory.geo.latitude : ""
-        // let longitude = this.props.diory.geo ? this.props.diory.geo.longitude : ""
         return React.createElement("div", null,
-            React.createElement("input", { value: this.props.diory.name, onChange: function (event) { _this.props.onDioryChange({ name: event.target.value }); } }),
+            React.createElement("input", { value: this.props.diory.name || "", onChange: function (event) { _this.props.onDioryChange({ name: event.target.value }); } }),
             React.createElement("br", null),
-            React.createElement("input", { value: this.props.diory.type, onChange: function (event) { _this.props.onDioryChange({ type: event.target.value }); } }),
+            React.createElement("input", { value: this.props.diory.type || "", onChange: function (event) { _this.props.onDioryChange({ type: event.target.value }); } }),
             React.createElement("br", null),
-            React.createElement("input", { value: this.props.diory.geo.latitude, onChange: function (event) { _this.props.onDioryChange({ geo: { latitude: event.target.value } }); } }),
+            React.createElement("input", { value: this.props.diory.geo.latitude || "", onChange: function (event) { _this.props.onDioryChange({ geo: { latitude: event.target.value } }); } }),
             React.createElement("br", null),
-            React.createElement("input", { value: this.props.diory.geo.longitude, onChange: function (event) { _this.props.onDioryChange({ geo: { longitude: event.target.value } }); } }),
+            React.createElement("input", { value: this.props.diory.geo.longitude || "", onChange: function (event) { _this.props.onDioryChange({ geo: { longitude: event.target.value } }); } }),
             React.createElement("br", null),
-            React.createElement("button", { onClick: function () { console.log("Button clicked"); } }, "Button"));
+            this.props.diory.connectedDiories ? this.props.diory.connectedDiories.length : "",
+            React.createElement("br", null),
+            React.createElement("button", { onClick: function () { _this.props.onSaveClick(); } }, "Save"));
     };
     return DioryForm;
 }(React.Component));
