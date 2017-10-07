@@ -15,6 +15,7 @@ export class DioryForm extends React.Component<DioryFormProps, undefined> {
       <input value={this.props.diory.type || ""} onChange={(event) => { this.props.onDioryChange({type: event.target.value}) }}  /><br/>
       <input value={this.props.diory.geo.latitude || ""} onChange={(event) => { this.props.onDioryChange({geo: {latitude: event.target.value}}) }}  /><br/>
       <input value={this.props.diory.geo.longitude || ""} onChange={(event) => { this.props.onDioryChange({geo: {longitude: event.target.value}}) }}  /><br/>
+      {this.props.diory.connectedDiories ? this.props.diory.connectedDiories.length : ""}<br/>
       <button onClick={() => { this.props.onSaveClick() }}>Save</button>
     </div>
   }
