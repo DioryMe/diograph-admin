@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export interface DioryListProps { diories: any }
+export interface DioryListProps { diories: any, onFocusClick: any }
 
 export class DioryList extends React.Component<DioryListProps, undefined> {
 
@@ -11,7 +11,7 @@ export class DioryList extends React.Component<DioryListProps, undefined> {
   render() {
     return <ul>
       {this.props.diories.map((diory, index) => {
-       return <li onClick={() => { this.setState({inFocus: diory})} } key={ index }>{ diory.name }</li>;
+       return <li onClick={() => { this.props.onFocusClick(diory.id)} } key={ index }>{ diory.name }</li>;
       })}
     </ul>
   }

@@ -27,7 +27,7 @@ class App extends React.Component {
       <div>
         <DiographSearchCreate onFocusClick={(dioryId) => { this.putInFocus(dioryId)}} />
         <DioryForm diory={this.state.inFocus} onDioryChange={(diory) => { this.onDioryChange(diory) }} />
-        <DioryList diories={this.state.diories} />
+        <DioryList diories={this.state.diories} onFocusClick={(dioryId) => { this.putInFocus(dioryId)}} />
       </div>
     )
   }
