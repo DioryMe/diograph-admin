@@ -29,7 +29,7 @@ class App extends React.Component {
         <DioryForm
           diory={this.state.inFocus}
           onDioryChange={(diory) => { this.onDioryChange(diory) }}
-          onSaveClick={() => console.log(this.state.inFocus) }/>
+          onSaveClick={() => this.saveChangesToDiory() }/>
         <DioryList diories={this.state.diories} onFocusClick={(dioryId) => { this.putInFocus(dioryId)}} />
       </div>
     )
@@ -54,6 +54,21 @@ class App extends React.Component {
     for (var attrname in d) { diory[attrname] = d[attrname]; }
     this.setState({inFocus: diory})
   }
+
+  saveChangesToDiory() {
+    let diory = this.state.inFocus
+    DiographStore.updateDiory(diory.id, diory).then(updatedDiory => {
+      this.putInFocus(updatedDiory.id)
+      this.refreshDioryList()
+    })
+  }
+
+  refreshDioryList() {
+    DiographStore.getAllDiories().then((result) => {
+      this.setState({diories: result})
+    })
+  }
+
 }
 
 ReactDOM.render(
