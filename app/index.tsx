@@ -18,7 +18,6 @@ class App extends React.Component {
 
     DiographStore.getAllDiories().then((result) => {
       this.setState({diories: result})
-      this.setState({inFocus: this.state.diories[4]})
     })
   }
 
