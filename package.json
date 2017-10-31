@@ -20,7 +20,7 @@
     "@types/node": "6.0.89",
     "@types/react": "16.0.10",
     "selenium-webdriver": "3.6.0",
-    "diograph-store": "../diograph-store",
+    "diograph-store": "*",
     "diograph-authentication": "*",
     "diograph-search-create": "*"
   },

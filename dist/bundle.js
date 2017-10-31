@@ -22875,6 +22875,10 @@ var DiographStore = /** @class */ (function () {
             obj["diory-type"] = obj["type"];
             delete obj["type"];
         }
+        if (obj["url"]) {
+            obj["address"] = obj["url"];
+            delete obj["url"];
+        }
         if (obj["geo"] != undefined) {
             obj["latitude"] = obj["geo"]["latitude"];
             obj["longitude"] = obj["geo"]["longitude"];
@@ -23283,7 +23287,6 @@ var DiographApi = /** @class */ (function () {
             throw "Authentication token is invalid.";
         }
     };
-    // private static baseUrl = localStorage.getItem("endpoint")
     DiographApi.get = function (id, type) {
         if (type === void 0) { type = "diories"; }
         if (type !== "diories" && type !== "connections") {
@@ -23399,8 +23402,9 @@ var DiographApi = /** @class */ (function () {
         }
         return jsonApiData;
     };
-    // DiographApi.baseUrl = "http://diory-server.herokuapp.com/v1/";
-    DiographApi.baseUrl = "http://localhost:3000/v1/";
+    // private static baseUrl = "http://diory-server.herokuapp.com/v1/";
+    // private static baseUrl = "http://localhost:3000/v1/";
+    DiographApi.baseUrl = localStorage.getItem("endpoint");
     return DiographApi;
 }());
 exports.DiographApi = DiographApi;
