@@ -54,6 +54,8 @@ describe('<DioryForm />', () => {
   })
 
   it('calls onSaveClick when save is clicked', () => {
+    component.find('button[name="saveButton"]').simulate('click');
+    expect(saveClicked).toBeTruthy()
   })
 
 })
