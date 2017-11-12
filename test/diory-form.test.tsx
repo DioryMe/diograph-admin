@@ -27,6 +27,8 @@ describe('<DioryForm />', () => {
     component = mount(<DioryForm diory={diory} onDioryChange={onDioryChange} onSaveClick={onSaveClick} />)
   })
 
+  // Helper tests //
+
   it('onSaveClick turns saveClicked to true', () => {
     expect(saveClicked === false).toBeTruthy();
     onSaveClick()
@@ -39,6 +41,8 @@ describe('<DioryForm />', () => {
     expect(changedValue).toEqual("changed value");
   })
 
+  // Props diory //
+
   it('sets diory from props', () => {
     expect(component.prop('diory')).toEqual(diory)
   })
@@ -48,10 +52,14 @@ describe('<DioryForm />', () => {
     expect(nameInputText).toEqual("Name")
   })
 
+  // Calling onDioryChange //
+
   it('calls onDioryChange when input value is changed', () => {
     component.find('input[name="name"]').simulate('change', {target: {value: 'My new value'}});
     expect(changedValue).toEqual({name: "My new value"})
   })
+
+  // Calling onSaveClick //
 
   it('calls onSaveClick when save is clicked', () => {
     component.find('button[name="saveButton"]').simulate('click');
