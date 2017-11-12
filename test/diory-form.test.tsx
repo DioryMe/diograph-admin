@@ -29,4 +29,13 @@ describe('<DioryForm />', () => {
     expect(component.prop('diory')).toEqual(diory)
   })
 
+  it('puts name value to name input if given', () => {
+  })
+
+  it('calls onDioryChange when input value is changed', () => {
+  })
+
+  it('calls onSaveClick when save is clicked', () => {
+  })
+
 })
