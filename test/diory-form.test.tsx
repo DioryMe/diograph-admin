@@ -4,7 +4,7 @@ import { DioryForm } from '../app/diory-form'
 import * as Adapter from 'enzyme-adapter-react-16';
 
 describe('<DioryForm />', () => {
-  let component
+  let component, changedValue, saveClicked
   const diory = {
     name: "Name",
     type: "Type",
@@ -17,12 +17,26 @@ describe('<DioryForm />', () => {
     date: "Date",
     connectedDiories: []
   }
-  const onDioryChange = () => { console.log("CHANGE")}
-  const onSaveClick = () => { console.log("SAVE")}
+  const onDioryChange = (value) => { changedValue = value }
+  const onSaveClick = () => { saveClicked = true }
   configure({ adapter: new Adapter() })
 
   beforeEach(() => {
+    changedValue = undefined
+    saveClicked = false
     component = mount(<DioryForm diory={diory} onDioryChange={onDioryChange} onSaveClick={onSaveClick} />)
+  })
+
+  it('onSaveClick turns saveClicked to true', () => {
+    expect(saveClicked === false).toBeTruthy();
+    onSaveClick()
+    expect(saveClicked === true).toBeTruthy();
+  })
+
+  it('onDioryChange changes the changedValue', () => {
+    expect(changedValue === undefined).toBeTruthy();
+    onDioryChange("changed value")
+    expect(changedValue).toEqual("changed value");
   })
 
   it('sets diory from props', () => {
@@ -33,6 +47,8 @@ describe('<DioryForm />', () => {
   })
 
   it('calls onDioryChange when input value is changed', () => {
+    // component.find('input').get(3).simulate('change', {target: {value: 'My new value'}});
+    // expect(changedValue).toEqual("My new value")
   })
 
   it('calls onSaveClick when save is clicked', () => {
