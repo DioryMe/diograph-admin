@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack && cp ./app/index.html ./dist && webpack-dev-server --port 4203 --content-base dist/ --inline --hot",
     "test": "tsc && jasmine JASMINE_CONFIG_PATH=jasmine.json",
-    "e2e": "tsc && webpack && jasmine JASMINE_CONFIG_PATH=jasmine.json",
+    "e2e": "tsc test/diory-form.test.tsx --jsx react; jest",
     "compile": "webpack"
   },
   "author": "",
@@ -22,7 +22,9 @@
     "selenium-webdriver": "3.6.0",
     "diograph-store": "*",
     "diograph-authentication": "*",
-    "diograph-search-create": "*"
+    "diograph-search-create": "*",
+    "enzyme": "3.1.1",
+    "enzyme-adapter-react-16": "^1.0.4"
   },
   "dependencies": {
     "react": "16.0.0",

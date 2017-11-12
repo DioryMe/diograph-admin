@@ -3,12 +3,18 @@
 ## Usage / Development
 
 ```
+npm install -g webpack
+npm install
 npm start
 ```
 Then go to: http://localhost:4203/
 
 
 ## Tests
+
+```
+npm install -g jest jasmine
+```
 
 ```
 npm test
