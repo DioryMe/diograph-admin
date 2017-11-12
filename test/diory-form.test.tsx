@@ -44,6 +44,8 @@ describe('<DioryForm />', () => {
   })
 
   it('puts name value to name input if given', () => {
+    let nameInputText = component.find('input[name="name"]').props().value;
+    expect(nameInputText).toEqual("Name")
   })
 
   it('calls onDioryChange when input value is changed', () => {

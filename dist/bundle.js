@@ -38968,7 +38968,7 @@ var DioryForm = /** @class */ (function (_super) {
         var _this = this;
         return React.createElement("div", null,
             "Name: ",
-            React.createElement("input", { value: this.props.diory.name || "", onChange: function (event) { _this.props.onDioryChange({ name: event.target.value }); } }),
+            React.createElement("input", { name: "name", value: this.props.diory.name || "", onChange: function (event) { _this.props.onDioryChange({ name: event.target.value }); } }),
             "Type: ",
             React.createElement("input", { value: this.props.diory.type || "", onChange: function (event) { _this.props.onDioryChange({ type: event.target.value }); } }),
             React.createElement("br", null),
