@@ -47,8 +47,8 @@ describe('<DioryForm />', () => {
   })
 
   it('calls onDioryChange when input value is changed', () => {
-    // component.find('input').get(3).simulate('change', {target: {value: 'My new value'}});
-    // expect(changedValue).toEqual("My new value")
+    component.find('input[name="name"]').simulate('change', {target: {value: 'My new value'}});
+    expect(changedValue).toEqual({name: "My new value"})
   })
 
   it('calls onSaveClick when save is clicked', () => {

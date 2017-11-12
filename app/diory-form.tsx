@@ -10,7 +10,7 @@ export class DioryForm extends React.Component<DioryFormProps, undefined> {
 
   render() {
     return <div>
-      Name: <input value={this.props.diory.name || ""} onChange={(event) => { this.props.onDioryChange({name: event.target.value}) }}  />
+      Name: <input name="name" value={this.props.diory.name || ""} onChange={(event) => { this.props.onDioryChange({name: event.target.value}) }}  />
       Type: <input value={this.props.diory.type || ""} onChange={(event) => { this.props.onDioryChange({type: event.target.value}) }}  /><br/>
       Background: <input value={this.props.diory.background || ""} onChange={(event) => { this.props.onDioryChange({background: event.target.value}) }}  />
       <a target="_blank" href={this.props.diory.url || ""}>Address:</a> <input value={this.props.diory.url || ""} onChange={(event) => { this.props.onDioryChange({url: event.target.value}) }}  /><br/>
