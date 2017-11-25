@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack && cp ./app/index.html ./dist && webpack-dev-server --port 4203 --content-base dist/ --inline --hot",
     "test": "tsc && jasmine JASMINE_CONFIG_PATH=jasmine.json",
-    "e2e": "tsc test/diory-form.test.tsx --jsx react; jest",
+    "e2e": "tsc test/diory-form.test.tsx --jsx react --outDir ./dist; jest",
     "compile": "webpack"
   },
   "author": "",
