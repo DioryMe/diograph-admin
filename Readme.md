@@ -17,7 +17,7 @@ npm install -g jest jasmine
 ```
 
 ```
-npm test
+npm run e2e
 ```
 
 ## Deploy
