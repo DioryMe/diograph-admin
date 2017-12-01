@@ -7,6 +7,9 @@ import { DiographSearchCreate } from "diograph-search-create"
 import { DioryForm } from "./diory-form"
 import { DioryList } from "./diory-list"
 
+// Promise.all() requires this to work
+declare var Promise: any;
+
 class App extends React.Component {
   state
   inFocus
@@ -14,7 +17,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     DiographStore.setAuthToken(DiographAuthentication.token);
-    this.state = {diories: [], inFocus: {geo: {}}}
+    this.state = {diories: [], inFocus: {geo: {}, connections: []}}
 
     DiographStore.getAllDiories().then((result) => {
       this.setState({diories: result})
@@ -35,8 +38,20 @@ class App extends React.Component {
   }
 
   putInFocus(dioryId) {
-    let diory = DiographStore.getDiory(dioryId).then((diory) => {
-      this.setState({inFocus: diory})
+    let promises = []
+    let connections = []
+    DiographStore.getDiory(dioryId).then(dioryInFocus => {
+      dioryInFocus.connectedDiories.forEach(connectedDiory => {
+        let connectionPromise = DiographStore.getConnection(dioryId, connectedDiory.id).then(connection => {
+          connections.push(connection)
+        })
+        promises.push(connectionPromise)
+      })
+
+      Promise.all(promises).then(() => {
+        dioryInFocus.connections = connections
+        this.setState({inFocus: dioryInFocus})
+      })
     })
   }
 

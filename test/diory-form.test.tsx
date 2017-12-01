@@ -15,7 +15,8 @@ describe('<DioryForm />', () => {
       longitude: "34"
     },
     date: "Date",
-    connectedDiories: []
+    connectedDiories: [{}, {}],
+    connections: [{}, {}]
   }
   const onDioryChange = (value) => { changedValue = value }
   const onSaveClick = () => { saveClicked = true }
@@ -64,6 +65,16 @@ describe('<DioryForm />', () => {
   it('calls onSaveClick when save is clicked', () => {
     component.find('button[name="saveButton"]').simulate('click');
     expect(saveClicked).toBeTruthy()
+  })
+
+  // Connected diories //
+
+  it('shows the number of connected diories', () => {
+    expect(component.find('.connected-diories-count').text()).toEqual("Connected diories: 2")
+  })
+
+  it('shows as many elements as there are connected diories', () => {
+    expect(component.find('.connection').length).toEqual(2)
   })
 
 })

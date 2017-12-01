@@ -17,7 +17,14 @@ export class DioryForm extends React.Component<DioryFormProps, undefined> {
       Gps: <input name="latitude" value={this.props.diory.geo.latitude || ""} onChange={(event) => { this.props.onDioryChange({geo: {latitude: event.target.value}}) }}  />
       <input name="longitude" value={this.props.diory.geo.longitude || ""} onChange={(event) => { this.props.onDioryChange({geo: {longitude: event.target.value}}) }}  /><br/>
       Date: <input name="date" value={this.props.diory.date || ""} onChange={(event) => { this.props.onDioryChange({date: event.target.value}) }}  /><br/>
-      Connected diories: {this.props.diory.connectedDiories ? this.props.diory.connectedDiories.length : 0}<br/>
+
+      <div className="connected-diories-count">Connected diories: {this.props.diory.connectedDiories ? this.props.diory.connectedDiories.length : 0}</div><br/>
+      {this.props.diory.connections.map((connection, index) => {
+        return <div className="connection" key={index}>
+          - ID: {connection.id}, fromDioryId: {connection.fromDioryId}, toDioryId: {connection.toDioryId}
+        </div>;
+      })}
+
       <button name="saveButton" onClick={() => { this.props.onSaveClick() }}>Save</button><br />
       <img src={this.props.diory.background || ""} width="320"/>
     </div>
