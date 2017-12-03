@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-export interface DioryListProps { diories: any, onFocusClick: any }
+export interface DioryListProps {
+  diories: any,
+  onFocusClick: any,
+  onConnectDioriesClick: any,
+  onDeleteDioryClick: any
+ }
 
 export class DioryList extends React.Component<DioryListProps, undefined> {
 
