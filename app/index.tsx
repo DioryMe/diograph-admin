@@ -6,6 +6,7 @@ import { DiographAuthentication } from "diograph-authentication"
 import { DiographSearchCreate } from "diograph-search-create"
 import { DioryForm } from "./diory-form"
 import { DioryList } from "./diory-list"
+import { ConnectedDioriesList } from "./connected-diories-list"
 
 // Promise.all() requires this to work
 declare var Promise: any;
@@ -31,8 +32,11 @@ class App extends React.Component {
         <DioryForm
           diory={this.state.inFocus}
           onDioryChange={(diory) => { this.onDioryChange(diory) }}
-          onSaveClick={() => this.saveChangesToDiory() }
-          onDeleteConnectionClick={(fromDioryId, toDioryId) => { this.onDeleteConnectionClick(fromDioryId, toDioryId) }} />
+          onSaveClick={() => this.saveChangesToDiory() } />
+        <ConnectedDioriesList
+         connectedDiories={this.state.inFocus.connectedDiories}
+         connections={this.state.inFocus.connections}
+         onDeleteConnectionClick={(fromDioryId, toDioryId) => { this.onDeleteConnectionClick(fromDioryId, toDioryId) }} />
         <DioryList
           diories={this.state.diories}
           onFocusClick={(dioryId) => { this.putInFocus(dioryId)}}
