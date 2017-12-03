@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-export interface DioryFormProps { diory: any, onDioryChange: any, onSaveClick: any }
+export interface DioryFormProps {
+  diory: any,
+  onDioryChange: any,
+  onSaveClick: any,
+  onDeleteConnectionClick: any
+}
 
 export class DioryForm extends React.Component<DioryFormProps, undefined> {
 
@@ -22,7 +27,7 @@ export class DioryForm extends React.Component<DioryFormProps, undefined> {
       {this.props.diory.connections.map((connection, index) => {
         return <div className="connection" key={index}>
           - ID: {connection.id}, fromDioryId: {connection.fromDioryId}, toDioryId: {connection.toDioryId}
-          <a onClick={() => { if(confirm('Delete the item?')) { console.log("Connection deleted (id: " + connection.id + ")") } }}> [ X ] </a>
+          <a onClick={() => { if(confirm("Delete the connection (id: " + connection.id + ")?")) { this.props.onDeleteConnectionClick(connection.fromDioryId, connection.toDioryId) } }}> [ X ] </a>
         </div>;
       })}
 

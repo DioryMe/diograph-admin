@@ -31,7 +31,8 @@ class App extends React.Component {
         <DioryForm
           diory={this.state.inFocus}
           onDioryChange={(diory) => { this.onDioryChange(diory) }}
-          onSaveClick={() => this.saveChangesToDiory() }/>
+          onSaveClick={() => this.saveChangesToDiory() }
+          onDeleteConnectionClick={(fromDioryId, toDioryId) => { this.onDeleteConnectionClick(fromDioryId, toDioryId) }} />
         <DioryList
           diories={this.state.diories}
           onFocusClick={(dioryId) => { this.putInFocus(dioryId)}}
@@ -91,6 +92,12 @@ class App extends React.Component {
   onDeleteDioryClick(dioryId) {
     DiographStore.deleteDiory(dioryId).then(() => {
       this.refreshDioryList()
+    })
+  }
+
+  onDeleteConnectionClick(fromDioryId, toDioryId) {
+    DiographStore.deleteConnection(fromDioryId, toDioryId).then(() => {
+      this.putInFocus(fromDioryId)
     })
   }
 

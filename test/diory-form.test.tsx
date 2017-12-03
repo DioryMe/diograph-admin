@@ -25,7 +25,14 @@ describe('<DioryForm />', () => {
   beforeEach(() => {
     changedValue = undefined
     saveClicked = false
-    component = mount(<DioryForm diory={diory} onDioryChange={onDioryChange} onSaveClick={onSaveClick} />)
+    component = mount(
+      <DioryForm
+        diory={diory}
+        onDioryChange={onDioryChange}
+        onSaveClick={onSaveClick}
+        onDeleteConnectionClick={() => {}}
+      />
+    )
   })
 
   // Helper tests //
