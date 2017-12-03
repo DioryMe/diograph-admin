@@ -20,11 +20,14 @@ describe('<ConnectedDioriesList />', () => {
   }
   const connection = {
     id: 1,
-    fromDioryId: 1
+    fromDioryId: 1,
     toDioryId: 2
   }
-  let connectedDiories = [diory, diory]
-  let connections = [connection, connection]
+  const connectedDiories = [diory, diory]
+  const connections = [connection, connection]
+  const onDeleteConnectionClick = () => { }
+
+
   configure({ adapter: new Adapter() })
 
   beforeEach(() => {
@@ -32,6 +35,7 @@ describe('<ConnectedDioriesList />', () => {
       <ConnectedDioriesList
         connectedDiories={connectedDiories}
         connections={connections}
+        onDeleteConnectionClick={onDeleteConnectionClick}
       />
     )
   })

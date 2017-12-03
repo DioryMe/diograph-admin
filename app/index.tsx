@@ -95,6 +95,7 @@ class App extends React.Component {
 
   onDeleteDioryClick(dioryId) {
     DiographStore.deleteDiory(dioryId).then(() => {
+      this.putInFocus(this.state.inFocus.id)
       this.refreshDioryList()
     })
   }
