@@ -69,6 +69,8 @@ class App extends React.Component {
 
   saveChangesToDiory() {
     let diory = this.state.inFocus
+    delete diory.connections
+    delete diory.connectedDiories
     DiographStore.updateDiory(diory.id, diory).then(updatedDiory => {
       this.putInFocus(updatedDiory.id)
       this.refreshDioryList()
