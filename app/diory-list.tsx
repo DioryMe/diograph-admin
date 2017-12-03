@@ -18,8 +18,8 @@ export class DioryList extends React.Component<DioryListProps, undefined> {
       {this.props.diories.map((diory, index) => {
        return <li key={ index }>
          <a onClick={() => { this.props.onFocusClick(diory.id)} } >{ diory.name }</a>
-         <a onClick={() => { if(confirm('Connect to the diory in focus?')) { console.log("Diory (id: " + diory.id + ") connected to diory in focus") } }}> [ + ] </a>
-         <a onClick={() => { if(confirm('Delete the item?')) { console.log("Diory deleted (id:" + diory.id + ")") } }}> [ X ] </a>
+         <a onClick={() => { if(confirm('Connect to the diory in focus?')) { this.props.onConnectDioriesClick(diory.id) } }}> [ + ] </a>
+         <a onClick={() => { if(confirm('Delete the diory?')) { this.props.onDeleteDioryClick(diory.id) } }}> [ X ] </a>
        </li>;
       })}
     </ul>

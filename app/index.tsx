@@ -35,7 +35,7 @@ class App extends React.Component {
         <DioryList
           diories={this.state.diories}
           onFocusClick={(dioryId) => { this.putInFocus(dioryId)}}
-          onConnectDioriesClick={(fromDioryId, toDioryId) => { this.onConnectDioriesClick(fromDioryId, toDioryId) }}
+          onConnectDioriesClick={(toDioryId) => { this.onConnectDioriesClick(toDioryId) }}
           onDeleteDioryClick={(dioryId) => { this.onDeleteDioryClick(dioryId) }} />
       </div>
     )
@@ -81,7 +81,8 @@ class App extends React.Component {
     })
   }
 
-  onConnectDioriesClick(fromDioryId, toDioryId) {
+  onConnectDioriesClick(toDioryId) {
+    let fromDioryId = this.state.inFocus.id
     DiographStore.connectDiories(fromDioryId, toDioryId).then(connectionObject => {
       this.putInFocus(connectionObject.fromDiory.id)
     })
