@@ -22,6 +22,7 @@ export class DioryForm extends React.Component<DioryFormProps, undefined> {
       {this.props.diory.connections.map((connection, index) => {
         return <div className="connection" key={index}>
           - ID: {connection.id}, fromDioryId: {connection.fromDioryId}, toDioryId: {connection.toDioryId}
+          <a onClick={() => { if(confirm('Delete the item?')) { console.log("Connection deleted (id: " + connection.id + ")") } }}> [ X ] </a>
         </div>;
       })}
 
