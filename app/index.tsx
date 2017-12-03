@@ -37,22 +37,20 @@ class App extends React.Component {
     )
   }
 
-  putInFocus(dioryId) {
+  async putInFocus(dioryId) {
     let promises = []
     let connections = []
-    DiographStore.getDiory(dioryId).then(dioryInFocus => {
-      dioryInFocus.connectedDiories.forEach(connectedDiory => {
-        let connectionPromise = DiographStore.getConnection(dioryId, connectedDiory.id).then(connection => {
-          connections.push(connection)
-        })
-        promises.push(connectionPromise)
+    let dioryInFocus = await DiographStore.getDiory(dioryId)
+    dioryInFocus.connectedDiories.forEach(connectedDiory => {
+      let connectionPromise = DiographStore.getConnection(dioryId, connectedDiory.id).then(connection => {
+        connections.push(connection)
       })
-
-      Promise.all(promises).then(() => {
-        dioryInFocus.connections = connections
-        this.setState({inFocus: dioryInFocus})
-      })
+      promises.push(connectionPromise)
     })
+
+    await Promise.all(promises)
+    dioryInFocus.connections = connections
+    this.setState({inFocus: dioryInFocus})
   }
 
   onDioryChange(d) {
