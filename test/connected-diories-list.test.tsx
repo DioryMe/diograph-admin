@@ -6,6 +6,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 describe('<ConnectedDioriesList />', () => {
   let component
   const diory = {
+    id: 1,
     name: "Name",
     type: "Type",
     background: "Background",
@@ -15,16 +16,11 @@ describe('<ConnectedDioriesList />', () => {
       longitude: "34"
     },
     date: "Date",
-    connectedDiories: [{}, {}],
-    connections: [{}, {}]
+    connectedDiories: [{id: 2, name: "Another diory"}, {id: 3, name: "Third diory"}],
+    connections: [{id: 1, fromDioryId: 1, toDioryId: 2}, {id: 2, fromDioryId: 1, toDioryId: 3}]
   }
-  const connection = {
-    id: 1,
-    fromDioryId: 1,
-    toDioryId: 2
-  }
-  const connectedDiories = [diory, diory]
-  const connections = [connection, connection]
+  const connectedDiories = diory.connectedDiories
+  const connections = diory.connections
   const onDeleteConnectionClick = () => { }
 
 
@@ -40,14 +36,31 @@ describe('<ConnectedDioriesList />', () => {
     )
   })
 
-  // Connected diories //
-
   it('shows the number of connected diories', () => {
     expect(component.find('.connected-diories-count').text()).toEqual("Connected diories: " + connectedDiories.length)
   })
 
-  it('shows as many elements as there are connected diories', () => {
+  it('there are as many connections as there are connected diories', () => {
+    expect(connections.length).toEqual(connectedDiories.length)
+  })
+
+  it('connections toDioryIds match to connectedDioryIds', () => {
+    let connectionToDioryIds = connections.map((connection) => { return connection.toDioryId })
+    let connectedDioryIds = connectedDiories.map((connectedDiory) => { return connectedDiory.id })
+    expect(connectionToDioryIds.length).toEqual(connectedDioryIds.length)
+    connectionToDioryIds.forEach(toDioryId => {
+      expect(connectedDioryIds).toContain(toDioryId)
+    })
+  })
+
+  // it('shows as many connected diory elements as there are connected diories', () => {
+  //   expect(component.find('.connected-diory').length).toEqual(connectedDiories.length)
+  // })
+
+  it('shows as many connection elements as there are connections', () => {
     expect(component.find('.connection').length).toEqual(connections.length)
   })
+
+
 
 })
