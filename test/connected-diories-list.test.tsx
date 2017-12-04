@@ -58,8 +58,7 @@ describe('<ConnectedDioriesList />', () => {
   })
 
   it('shows diory name in the connected diory element', () => {
-    expect(component.find('.connected-diory')[0].text()).toEqual(connectedDiories[0].name)
-    expect(component.find('.connected-diory')[1].text()).toEqual(connectedDiories[1].name)
+    expect(component.find('.connected-diory').first().text()).toEqual(connectedDiories[0].name)
   })
 
   it('shows as many connection elements as there are connections', () => {
