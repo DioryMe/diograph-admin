@@ -36,7 +36,8 @@ class App extends React.Component {
         <ConnectedDioriesList
          connectedDiories={this.state.inFocus.connectedDiories}
          connections={this.state.inFocus.connections}
-         onDeleteConnectionClick={(fromDioryId, toDioryId) => { this.onDeleteConnectionClick(fromDioryId, toDioryId) }} />
+         onDeleteConnectionClick={(fromDioryId, toDioryId) => { this.onDeleteConnectionClick(fromDioryId, toDioryId) }}
+         onConnectedDioryClick={(connectedDioryId) => { this.putInFocus(connectedDioryId) }} />
         <DioryList
           diories={this.state.diories}
           onFocusClick={(dioryId) => { this.putInFocus(dioryId)}}

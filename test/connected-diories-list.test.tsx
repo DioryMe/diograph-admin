@@ -5,6 +5,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 
 describe('<ConnectedDioriesList />', () => {
   let component
+  let dioryInFocusId = 1
   const diory = {
     id: 1,
     name: "Name",
@@ -21,7 +22,9 @@ describe('<ConnectedDioriesList />', () => {
   }
   const connectedDiories = diory.connectedDiories
   const connections = diory.connections
+
   const onDeleteConnectionClick = () => { }
+  const onConnectedDioryClick = (id) => { dioryInFocusId = id }
 
 
   configure({ adapter: new Adapter() })
@@ -32,16 +35,13 @@ describe('<ConnectedDioriesList />', () => {
         connectedDiories={connectedDiories}
         connections={connections}
         onDeleteConnectionClick={onDeleteConnectionClick}
+        onConnectedDioryClick={onConnectedDioryClick}
       />
     )
   })
 
   it('shows the number of connected diories', () => {
     expect(component.find('.connected-diories-count').text()).toEqual("Connected diories: " + connectedDiories.length)
-  })
-
-  it('there are as many connections as there are connected diories', () => {
-    expect(connections.length).toEqual(connectedDiories.length)
   })
 
   it('connections toDioryIds match to connectedDioryIds', () => {
@@ -65,6 +65,10 @@ describe('<ConnectedDioriesList />', () => {
     expect(component.find('.connection').length).toEqual(connections.length)
   })
 
+  it('calls onConnectedDioryClick() when clicking connected diory name', () => {
+    component.find('.connected-diory').first().simulate('click');
+    expect(dioryInFocusId).toEqual(connectedDiories[0].id)
+  })
 
 
 })

@@ -3,7 +3,8 @@ import * as React from 'react';
 export interface ConnectedDioriesListProps {
   connectedDiories: any,
   connections: any,
-  onDeleteConnectionClick: any
+  onDeleteConnectionClick: any,
+  onConnectedDioryClick: any
 }
 
 export class ConnectedDioriesList extends React.Component<ConnectedDioriesListProps, undefined> {
@@ -16,7 +17,11 @@ export class ConnectedDioriesList extends React.Component<ConnectedDioriesListPr
     let connectedDiories = this.props.connectedDiories ? this.props.connectedDiories : []
     let connections = this.props.connections ? this.props.connections : []
     const connectedDioryElements = connectedDiories.map((connectedDiory, index) => {
-      return <div className="connected-diory" key={"diory" + index}>{connectedDiory.name}</div>
+      return <div
+        className="connected-diory"
+        key={"diory" + index}
+        onClick={() => { this.props.onConnectedDioryClick(connectedDiory.id)} }
+      >{connectedDiory.name}</div>
     });
     const connectionElements = connections.map((connection, index) => {
       return <div className="connection" key={"connection" + index}>
