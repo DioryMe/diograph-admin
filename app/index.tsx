@@ -28,6 +28,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <button onClick={() => { this.onCreateDioryClick() }}>Create new diory</button>
         <DiographSearchCreate onFocusClick={(dioryId) => { this.putInFocus(dioryId)}} />
         <DioryForm
           diory={this.state.inFocus}
@@ -75,6 +76,16 @@ class App extends React.Component {
     // Merge object d with diory
     for (var attrname in d) { diory[attrname] = d[attrname]; }
     this.setState({inFocus: diory})
+  }
+
+  onCreateDioryClick() {
+    let dioryObj = {
+      name: "New diory " + (new Date).toString().substr(0,21)
+    }
+    DiographStore.createDiory(dioryObj).then(createdDiory => {
+      this.putInFocus(createdDiory.id)
+      this.refreshDioryList()
+    })
   }
 
   saveChangesToDiory() {
