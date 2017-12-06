@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ConnectedDioriesListItem } from "./connected-diories-list-item"
 
 export interface ConnectedDioriesListProps {
   connectedDiories: any,
@@ -16,24 +17,19 @@ export class ConnectedDioriesList extends React.Component<ConnectedDioriesListPr
   render() {
     let connectedDiories = this.props.connectedDiories ? this.props.connectedDiories : []
     let connections = this.props.connections ? this.props.connections : []
-    const connectedDioryElements = connectedDiories.map((connectedDiory, index) => {
-      return <div
-        className="connected-diory"
-        key={"diory" + index}
-        onClick={() => { this.props.onConnectedDioryClick(connectedDiory.id)} }
-      >{connectedDiory.name}</div>
-    });
-    const connectionElements = connections.map((connection, index) => {
-      return <div className="connection" key={"connection" + index}>
-        - ID: {connection.id}, fromDioryId: {connection.fromDioryId}, toDioryId: {connection.toDioryId}
-        <a onClick={() => { if(confirm("Delete the connection (id: " + connection.id + ")?")) { this.props.onDeleteConnectionClick(connection.fromDioryId, connection.toDioryId) } }}> [ X ] </a>
-      </div>
-    })
+
     let connectedDioriesList = []
-    connectedDioryElements.forEach((c, index) => {
-      connectedDioriesList.push(connectedDioryElements[index])
-      connectedDioriesList.push(connectionElements[index])
+    connectedDiories.forEach((c, index) => {
+      connectedDioriesList.push(
+        <ConnectedDioriesListItem key={"connected-diories-list-item" + index}
+          connectedDiory={connectedDiories[index]}
+          connection={connections[index]}
+          onConnectedDioryClick={this.props.onConnectedDioryClick}
+          onDeleteConnectionClick={this.props.onDeleteConnectionClick}
+        />
+      )
     })
+
     return <div>
       <div className="connected-diories-count">Connected diories: {connectedDiories.length}</div><br/>
       {connectedDioriesList}
