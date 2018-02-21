@@ -21,7 +21,7 @@
     "@types/react": "16.0.27",
     "@types/enzyme": "3.1.5",
     "selenium-webdriver": "3.6.0",
-    "diograph-store": "file:../diograph-store",
+    "diograph-store": "*",
     "diograph-authentication": "*",
     "diograph-search-create": "*",
     "enzyme": "3.2.0",
