@@ -15,7 +15,8 @@ describe('<DioryForm />', () => {
       longitude: "34"
     },
     date: "Date",
-    connectedDiories: []
+    connectedDiories: [{}, {}],
+    connections: [{}, {}]
   }
   const onDioryChange = (value) => { changedValue = value }
   const onSaveClick = () => { saveClicked = true }
@@ -24,7 +25,13 @@ describe('<DioryForm />', () => {
   beforeEach(() => {
     changedValue = undefined
     saveClicked = false
-    component = mount(<DioryForm diory={diory} onDioryChange={onDioryChange} onSaveClick={onSaveClick} />)
+    component = mount(
+      <DioryForm
+        diory={diory}
+        onDioryChange={onDioryChange}
+        onSaveClick={onSaveClick}
+      />
+    )
   })
 
   // Helper tests //
