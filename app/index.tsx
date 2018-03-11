@@ -18,6 +18,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     DiographStore.setAuthToken(DiographAuthentication.token);
+    document.getElementById('files').addEventListener('change', DiographStore.createDioryFromImageFile, false);
     this.state = {diories: [], inFocus: {geo: {}, connections: []}}
 
     DiographStore.getAllDiories().then((result) => {
