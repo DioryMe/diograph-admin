@@ -28,6 +28,8 @@ describe('<DioryList />', () => {
   configure({ adapter: new Adapter() })
 
   beforeEach(() => {
+    this.jsdom = require('jsdom-global')()
+    
     component = mount(
       <DioryList
         diories={diories}

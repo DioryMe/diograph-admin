@@ -23,6 +23,8 @@ describe('<DioryForm />', () => {
   configure({ adapter: new Adapter() })
 
   beforeEach(() => {
+    this.jsdom = require('jsdom-global')()
+    
     changedValue = undefined
     saveClicked = false
     component = mount(

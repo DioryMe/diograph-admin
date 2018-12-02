@@ -26,10 +26,11 @@ describe('<ConnectedDioriesList />', () => {
   const onDeleteConnectionClick = () => { }
   const onConnectedDioryClick = (id) => { dioryInFocusId = id }
 
-
   configure({ adapter: new Adapter() })
 
   beforeEach(() => {
+    this.jsdom = require('jsdom-global')()
+
     component = mount(
       <ConnectedDioriesList
         connectedDiories={connectedDiories}
