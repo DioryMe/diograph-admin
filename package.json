@@ -1,6 +1,6 @@
 {
   "name": "diograph-admin",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "",
   "scripts": {
     "start": "npx webpack && cp ./app/index.html ./dist/index.html && npx webpack-dev-server",

@@ -3,7 +3,6 @@
 ## Usage / Development
 
 ```
-npm install -g webpack
 npm install
 npm start
 ```
@@ -13,18 +12,5 @@ Then go to: http://localhost:4203/
 ## Tests
 
 ```
-npm install -g jest jasmine
-```
-
-```
-npm run e2e
-```
-
-## Deploy
-
-```
-webpack
-cp app/index.html dist/index.html
-# Change "../dist/bundle.js" to "../bundle.js" in dist/index.html
-surge ./dist diograph-admin.surge.sh
+npm test
 ```
