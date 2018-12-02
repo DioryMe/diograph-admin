@@ -20,7 +20,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js']
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['dist'], { exclude: ["index.html"] }),
     new webpack.EnvironmentPlugin({
       'DIOGRAPH_SERVER_HOST': 'http://localhost:3000'
     })

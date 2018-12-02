@@ -5,7 +5,8 @@
   "scripts": {
     "start": "npx webpack && cp ./app/index.html ./dist/index.html && npx webpack-dev-server",
     "test": "rm -r ./dist; npx tsc && npx jasmine JASMINE_CONFIG_PATH=jasmine.json",
-    "compile": "npx webpack"
+    "compile": "npx webpack",
+    "deploy": "npm run compile && surge ./dist diograph-admin.surge.sh"
   },
   "author": "",
   "license": "ISC",
