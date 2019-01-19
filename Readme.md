@@ -3,6 +3,7 @@
 ## Usage / Development
 
 ```
+npm install -g npx
 npm install
 npm start
 ```
