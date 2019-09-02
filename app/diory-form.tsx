@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { DiographAuthentication } from "diograph-authentication"
 
 export interface DioryFormProps {
   diory: any,
@@ -15,7 +16,7 @@ export class DioryForm extends React.Component<DioryFormProps, undefined> {
   render() {
     let backgroundUrl
     if (this.props.diory.background) {
-      backgroundUrl = this.props.diory.background + '?token=my-receipts'
+      backgroundUrl = this.props.diory.background + '?token=' + DiographAuthentication.token
     }
 
     return <div>
