@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { DiographAuthentication } from "diograph-authentication"
 
 export interface ConnectedDioriesListItemProps {
   connectedDiory: any,
@@ -10,13 +11,19 @@ export interface ConnectedDioriesListItemProps {
 export class ConnectedDioriesListItem extends React.Component<ConnectedDioriesListItemProps, undefined> {
 
   render() {
+    let connectedDiorybackgroundUrl
     let connectedDiory = this.props.connectedDiory
     let connection = this.props.connection
+
+    if (this.props.connectedDiory.background) {
+      connectedDiorybackgroundUrl = this.props.connectedDiory.background + '?token=' + DiographAuthentication.token
+    }
+
     return <div>
 
       <div className="connected-diory" key={"diory" + connectedDiory.id}
         onClick={() => { this.props.onConnectedDioryClick(connectedDiory.id)} }>
-        <img width="320" src={ connectedDiory.background } />
+        <img width="320" src={ connectedDiorybackgroundUrl } />
         {connectedDiory.name}
       </div>
 

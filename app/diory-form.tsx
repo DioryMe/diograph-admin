@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { DiographAuthentication } from "diograph-authentication"
 
 export interface DioryFormProps {
   diory: any,
@@ -13,6 +14,11 @@ export class DioryForm extends React.Component<DioryFormProps, undefined> {
   }
 
   render() {
+    let backgroundUrl
+    if (this.props.diory.background) {
+      backgroundUrl = this.props.diory.background + '?token=' + DiographAuthentication.token
+    }
+
     return <div>
       Id: {this.props.diory.id} <br/>
       Name: <input name="name" value={this.props.diory.name || ""} onChange={(event) => { this.props.onDioryChange({name: event.target.value}) }}  />
@@ -24,7 +30,7 @@ export class DioryForm extends React.Component<DioryFormProps, undefined> {
       Date: <input name="date" value={this.props.diory.date || ""} onChange={(event) => { this.props.onDioryChange({date: event.target.value}) }}  /><br/>
 
       <button name="saveButton" onClick={() => { this.props.onSaveClick() }}>Save</button><br />
-      <img src={this.props.diory.background || ""} width="320"/>
+      <img src={backgroundUrl || ""} width="320"/>
     </div>
   }
 
