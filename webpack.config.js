@@ -22,7 +22,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist'], { exclude: ["index.html"] }),
     new webpack.EnvironmentPlugin({
-      'DIOGRAPH_SERVER_HOST': 'http://localhost:3000'
+      'DIOGRAPH_SERVER_HOST': 'http://diograph-server.herokuapp.com'
     })
   ],
   // Example taken from https://medium.com/code-oil/burning-questions-with-answers-to-why-webpack-dev-server-live-reload-does-not-work-6d6390277920
