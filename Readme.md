@@ -15,3 +15,9 @@ Then go to: http://localhost:4203/
 ```
 npm test
 ```
+
+## Deploy
+
+```
+npm run deploy
+```
